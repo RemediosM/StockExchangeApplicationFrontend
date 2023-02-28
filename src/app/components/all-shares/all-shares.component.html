@@ -1,0 +1,45 @@
+<button (click)="refresh()" type="button" class="btn btn-primary" style="outline: none">Refresh share list</button>
+<a href="/#/new"><button class="btn btn-success">Add</button></a>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Company name</th>
+            <th>Succes</th>
+            <th>Gain</th>
+            <th>Profit</th>
+            <th>Company URL part</th>
+            <th>Quantity</th>
+            <th>Purchase price</th>
+            <th>Expected price</th>
+            <th>Actual pirce</th>
+            <th>Last change</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let share of allShares" [ngClass]="{'succesAchieved': share.succes != undefined && share.succes > 1, 'lowGain': share.gain != undefined && share.gain < 0}">
+            <td>{{share.companyName}}</td>
+            <td>{{share.succes | percent}}</td>
+            <td>{{share.gain | percent}}</td>
+            <td>{{share.profit | number: '1.0-0'}}</td>
+            <td>{{share.companyUrlPart}}</td>
+            <td>{{share.qty}}</td>
+            <td>{{share.purchasePrice}}</td>
+            <td>{{share.expectedPrice}}</td>
+            <td>{{share.actualPrice}}</td>
+            <td>{{share.lastChange}}</td>
+            <td>
+                <a href="/#/edit/{{share.id}}">
+                    <button class="btn btn-secondary">Edit</button>
+                </a>
+            </td>
+            <td>
+                <button class="btn btn-danger" (click)="deleteShare(share.id, share.companyName)">X</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div *ngIf="allShares.length == 0">
+    <div class="alert alert-secondary" role="alert">No results</div>
+</div>

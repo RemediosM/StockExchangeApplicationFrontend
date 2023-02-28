@@ -1,0 +1,41 @@
+<div class="container">
+    <form>
+        <div *ngIf="notFoundError">
+            <div class="alert alert-danger">{{notFoundErrorMsg}}</div>
+            <button (click)="goBack()" class="btn btn-primary">Go back</button>
+        </div>
+
+        <div *ngIf="!submitted && !notFoundError">
+            <div class="form-group"> 
+                <label for="companyName">Company name</label>
+                <input class="form-control" id="companyName"  type="text" [(ngModel)]="share.companyName" [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="form-group"> 
+                <label for="companyUrlPart">Company URL part</label>
+                <input class="form-control" id="companyUrlPart"  type="text" [(ngModel)]="share.companyUrlPart" [ngModelOptions]="{standalone: true}"> 
+            </div>
+            <div class="form-group"> 
+                <label for="qty">Quantity</label>
+                <input class="form-control" id="qty"  type="number" [(ngModel)]="share.qty" name="qty"> 
+            </div>
+            <div class="form-group"> 
+                <label for="purchasePrice">Purchase price</label>
+                <input class="form-control" id="purchasePrice"  type="number" [(ngModel)]="share.purchasePrice" [ngModelOptions]="{standalone: true}"> 
+            </div>
+            <div class="form-group"> 
+                <label for="expectedPrice">Expected price</label>
+                <input class="form-control" id="expectedPrice"  type="number" [(ngModel)]="share.expectedPrice" [ngModelOptions]="{standalone: true}"> 
+            </div>
+            <div *ngIf="saveError">
+                <div class="alert alert-danger">{{saveErrorMsg}}</div>
+            </div>
+            <button (click)="editShare()" type="submit" class="btn btn-primary">Submit</button>
+            <button (click)="goBack()" class="btn btn-secondary">Go back</button>
+        </div>
+        
+        <div *ngIf="submitted">
+            <div class="alert alert-success">{{submitMsg}}</div>
+            <button (click)="goBack()" class="btn btn-primary">Go back</button>
+        </div>
+    </form>
+</div>
